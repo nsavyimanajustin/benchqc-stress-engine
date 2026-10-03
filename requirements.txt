@@ -1,0 +1,5 @@
+# Optional dependencies for enhanced telemetry and formatting
+psutil>=5.9.0
+rich>=13.0.0
+numpy>=1.20.0
+pytest>=7.0.0

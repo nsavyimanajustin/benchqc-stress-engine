@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "benchqc-stress-engine"
+version = "1.0.0"
+description = "BenchQC Hardware Stress-Testing and Battery Sustenance Suite"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "BenchQC Team", email = "engineering@benchqc.com"}
+]
+keywords = ["benchqc", "stress-test", "battery-sustenance", "hardware-audit", "quality-control"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Hardware",
+]
+
+[project.scripts]
+benchqc = "benchqc.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["benchqc*"]

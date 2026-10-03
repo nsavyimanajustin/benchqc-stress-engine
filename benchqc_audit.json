@@ -1,0 +1,80 @@
+{
+  "auditId": "BQC-20261003-7C9D3B34",
+  "auditDate": "2026-10-03T08:25:31.789327+00:00",
+  "certifiedGrade": "A+",
+  "overallScore": 97.0,
+  "system": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "osVersion": "7.0.0-34-generic",
+    "cpu": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+    "cpuCores": 4,
+    "cpuThreads": 8,
+    "ramGb": 31.23,
+    "storageGb": 936.8,
+    "model": "S6445 MD61489",
+    "manufacturer": "MEDION",
+    "architecture": "x86_64",
+    "biosVersion": "212"
+  },
+  "battery": {
+    "healthPercent": 88.2,
+    "wearPercent": 11.8,
+    "cycleCount": 136,
+    "designCapacityMwh": 41610.0,
+    "fullCapacityMwh": 36685.0,
+    "currentCapacityMwh": 36240.0,
+    "currentVoltageMv": 12821.0,
+    "dischargeRateMw": 11800.0,
+    "projectedHoursStudent": 3.11,
+    "projectedHoursHeavy": 1.38,
+    "projectedHoursIdle": 6.33,
+    "studentBadge": "CAMPUS_READY_3H_TO_4H",
+    "isSimulatedOrAC": false,
+    "powerState": "Not charging",
+    "modelName": "M153137"
+  },
+  "thermals": {
+    "baselineTempC": 50.0,
+    "peakTempC": 51.4,
+    "deltaTempC": 1.4,
+    "throttleDetected": false,
+    "throttlingPercent": 0.0,
+    "frequencyBaselineGhz": 1.2,
+    "frequencyUnderStressGhz": 1.2
+  },
+  "qcSummary": {
+    "cpuStatus": "PASSED",
+    "memoryStatus": "PASSED",
+    "storageStatus": "PASSED",
+    "batteryStatus": "PASSED",
+    "thermalStatus": "PASSED",
+    "overallStatus": "CERTIFIED",
+    "passedChecksCount": 5,
+    "totalChecksCount": 5,
+    "notes": []
+  },
+  "studentSuitability": {
+    "recommendation": "Campus-ready for standard 3-hour lecture blocks and medium study sessions. Recommend carrying a lightweight charger for evening library marathons.",
+    "expectedClassroomBatteryLife": "3.1 Hours (Campus Ready)",
+    "badge": "CAMPUS_READY_3H_TO_4H",
+    "workloadReadiness": {
+      "webBrowsingAndResearch": "GOOD (3.5 - 4 hrs)",
+      "videoLecturesAndZoom": "GOOD (3 - 3.5 hrs)",
+      "codingAndIDEs": "GOOD (3 - 3.5 hrs)",
+      "multitaskingAndDocs": "GOOD (3.5 hrs)"
+    }
+  },
+  "benchmarks": {
+    "cpuFloatingPointOpsSec": 2731350438.6,
+    "cpuMultiCoreScore": 100.0,
+    "memoryThroughputMbSec": 978.9,
+    "memoryErrorsDetected": 0,
+    "storageSeqWriteMbSec": 114.8,
+    "storageSeqReadMbSec": 122.2,
+    "storageRandWriteIops": 87888.6,
+    "storageRandReadIops": 67982.0,
+    "stressDurationSeconds": 5.36
+  },
+  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-7C9D3B34",
+  "schemaVersion": "2026.1"
+}
