@@ -30,7 +30,7 @@ Examples:
     parser.add_argument(
         "--heavy", "-H",
         action="store_true",
-        help="Run maximum heavy stress test (sustained 100% CPU burn, large RAM fill, deep I/O torture)."
+        help="Run maximum heavy stress test (sustained 100%% CPU burn, large RAM fill, deep I/O torture)."
     )
     parser.add_argument(
         "--output", "-o",
