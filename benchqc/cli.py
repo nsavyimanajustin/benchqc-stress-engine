@@ -28,6 +28,11 @@ Examples:
         help="Run quick intake audit mode (shortened stress and sampling times)."
     )
     parser.add_argument(
+        "--heavy", "-H",
+        action="store_true",
+        help="Run maximum heavy stress test (sustained 100% CPU burn, large RAM fill, deep I/O torture)."
+    )
+    parser.add_argument(
         "--output", "-o",
         type=str,
         default="benchqc_audit.json",
@@ -57,7 +62,10 @@ def main(argv=None) -> int:
     if not args.no_banner:
         print_banner()
 
-    if args.quick:
+    if args.heavy:
+        print(f"  {Colors.BRIGHT_RED}[i] Running in MAXIMUM HEAVY STRESS mode (--heavy active)...{Colors.RESET}\n")
+        cfg = BenchConfig.heavy()
+    elif args.quick:
         print(f"  {Colors.BRIGHT_YELLOW}[i] Running in QUICK AUDIT mode (--quick active)...{Colors.RESET}\n")
         cfg = BenchConfig.quick()
     else:

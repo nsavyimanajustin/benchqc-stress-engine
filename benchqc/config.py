@@ -45,6 +45,18 @@ class BenchConfig:
         return cls(quick_mode=False)
 
     @classmethod
+    def heavy(cls) -> "BenchConfig":
+        return cls(
+            quick_mode=False,
+            cpu_stress_seconds=45,
+            memory_stress_seconds=25,
+            storage_stress_seconds=20,
+            battery_sampling_seconds=25,
+            memory_max_mb=4096,
+            storage_test_file_size_mb=256,
+        )
+
+    @classmethod
     def quick(cls) -> "BenchConfig":
         return cls(
             quick_mode=True,
