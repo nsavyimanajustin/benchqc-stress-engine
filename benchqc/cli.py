@@ -8,6 +8,7 @@ from benchqc.config import BenchConfig
 from benchqc.engine import BenchQCEngine
 from benchqc.ui.terminal import print_banner, Colors
 from benchqc.ui.report import render_terminal_report
+from benchqc.ui.html_report import generate_html_report
 
 
 def parse_args(args=None):
@@ -19,7 +20,8 @@ Examples:
   python -m benchqc                     # Run full standard hardware audit & battery sustenance profiling
   python -m benchqc --quick             # Run fast intake validation audit (5-10s)
   python -m benchqc -o my_audit.json    # Save audit artifact to custom JSON path
-  python -m benchqc --battery-only      # Run only the Student Sustenance Battery Benchmark
+  python -m benchqc --html report.html  # Generate visual HTML report
+  python -m benchqc --open-browser      # Auto-open HTML report in browser
         """
     )
     parser.add_argument(
@@ -37,6 +39,17 @@ Examples:
         type=str,
         default="benchqc_audit.json",
         help="Path for output JSON audit artifact (default: benchqc_audit.json)."
+    )
+    parser.add_argument(
+        "--html",
+        type=str,
+        default="benchqc_report.html",
+        help="Path for output standalone HTML certificate (default: benchqc_report.html)."
+    )
+    parser.add_argument(
+        "--open-browser",
+        action="store_true",
+        help="Automatically open the generated HTML report in the default browser."
     )
     parser.add_argument(
         "--no-banner",
@@ -77,6 +90,14 @@ def main(argv=None) -> int:
     try:
         audit = engine.run_full_suite(output_file=args.output)
         
+        # Generate standalone HTML certificate report
+        html_path = generate_html_report(audit, output_path=args.html)
+        print(f"  {Colors.BRIGHT_GREEN}[+] Visual HTML report generated: {html_path}{Colors.RESET}")
+        
+        if args.open_browser:
+            import webbrowser
+            webbrowser.open(os.path.abspath(html_path))
+
         if not args.no_report:
             render_terminal_report(audit)
 

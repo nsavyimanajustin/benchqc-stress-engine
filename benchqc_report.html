@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BenchQC Audit Report · BQC-20261003-448FAB44</title>
+  <style>
+    :root {
+      --bg: #0B0F17;
+      --card-bg: #131B29;
+      --card-border: #1E293B;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --accent-emerald: #10B981;
+      --accent-blue: #3B82F6;
+      --accent-amber: #F59E0B;
+      --accent-red: #EF4444;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #10B981, #047857);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .audit-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 70%), var(--card-bg);
+    }
+    @media (max-width: 640px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .audit-meta { text-align: left; }
+    }
+    .device-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 6px;
+    }
+    .device-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .grade-badge-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      background: #064e3b;
+      border: 2px solid #059669;
+      border-radius: 16px;
+      text-align: center;
+      min-width: 140px;
+    }
+    .grade-val {
+      font-size: 38px;
+      font-weight: 900;
+      color: #34d399;
+      line-height: 1;
+    }
+    .grade-score {
+      font-size: 12px;
+      color: #CBD5E1;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+    .badge-emerald {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+    }
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #60A5FA;
+    }
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94A3B8;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-box {
+      background: #0B0F17;
+      border: 1px solid #1E293B;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFF;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .table-spec {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .table-spec td {
+      padding: 10px 0;
+      border-bottom: 1px solid #1E293B;
+    }
+    .table-spec td:first-child {
+      color: var(--text-muted);
+      width: 35%;
+    }
+    .table-spec td:last-child {
+      font-weight: 600;
+      color: #FFF;
+    }
+    .qc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #0B0F17;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .pass-tag {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: #10B981;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #059669;
+    }
+    .btn-secondary {
+      background: #1E293B;
+      color: #E2E8F0;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+    }
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      .card { background: white; border: 1px solid #ccc; color: black; }
+      .stat-box, .qc-item { background: #f8fafc; border: 1px solid #e2e8f0; color: black; }
+      .btn-group { display: none; }
+      .device-title, .stat-val, .table-spec td:last-child { color: black; }
+      .logo-icon { -webkit-print-color-adjust: exact; }
+      .grade-badge-box { -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Navigation / Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <div>BENCH<span style="color: var(--accent-emerald);">QC</span> VERIFIED</div>
+    </div>
+    <div class="audit-meta">
+      <div>Audit ID: <strong>BQC-20261003-448FAB44</strong></div>
+      <div>Date: 2026-10-03 13:32:40 UTC</div>
+    </div>
+  </div>
+
+  <!-- Hero Summary Card -->
+  <div class="card hero-card">
+    <div>
+      <div class="device-title">S6445 MD61489</div>
+      <div class="device-sub">MEDION · Ubuntu 26.04.1 LTS · Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz</div>
+      <div class="badge-pill badge-amber">
+        🔌 DESK BOUND (< 3 HOURS)
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px; max-width: 520px;">
+        Battery capacity is degraded or limited. Charger required for prolonged campus lecture blocks and off-desk study.
+      </p>
+    </div>
+    <div class="grade-badge-box">
+      <div class="grade-val">A+</div>
+      <div class="grade-score">97.0 / 100</div>
+    </div>
+  </div>
+
+  <!-- Battery Sustenance Matrix -->
+  <div class="card">
+    <div class="section-title">
+      <span>🔋 Battery Sustenance & Load Endurance</span>
+    </div>
+    <div class="grid-3" style="margin-bottom: 16px;">
+      <div class="stat-box">
+        <div class="stat-label">🎓 Student Multitasking</div>
+        <div class="stat-val" style="color: #34D399;">2.1 Hours</div>
+        <div class="stat-sub">15 Tabs + Code IDE + Video</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">⚡ 100% Torture Burn</div>
+        <div class="stat-val" style="color: #60A5FA;">1.0 Hours</div>
+        <div class="stat-sub">Full Core Render / Compile</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">📖 Idle / Reading</div>
+        <div class="stat-val" style="color: #FBBF24;">4.4 Hours</div>
+        <div class="stat-sub">PDF Notes & Document View</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <table class="table-spec">
+        <tr>
+          <td>Health / Wear</td>
+          <td><strong>88.2% Health</strong> (Wear: 11.8%)</td>
+        </tr>
+        <tr>
+          <td>Cycle Count</td>
+          <td>137 Verified Cycles</td>
+        </tr>
+        <tr>
+          <td>Battery Capacity</td>
+          <td>36,685 mWh (Design: 41,610 mWh)</td>
+        </tr>
+      </table>
+      <table class="table-spec">
+        <tr>
+          <td>Discharge Draw</td>
+          <td>17,362 mW under load</td>
+        </tr>
+        <tr>
+          <td>Cell Voltage</td>
+          <td>10,623 mV</td>
+        </tr>
+        <tr>
+          <td>Classroom Life</td>
+          <td>2.1 Hours (Charger Needed)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Hardware Specification Sheet -->
+  <div class="card">
+    <div class="section-title">
+      <span>💻 Hardware Specifications & Thermals</span>
+    </div>
+    <div class="grid-2">
+      <table class="table-spec">
+        <tr>
+          <td>Processor</td>
+          <td>Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz (4C / 8T)</td>
+        </tr>
+        <tr>
+          <td>Installed RAM</td>
+          <td>31.2 GB (1086 MB/s throughput)</td>
+        </tr>
+        <tr>
+          <td>Primary Storage</td>
+          <td>937 GB NVMe / SSD</td>
+        </tr>
+        <tr>
+          <td>Disk Write / Read</td>
+          <td>Write: 194 MB/s · Read: 213 MB/s</td>
+        </tr>
+      </table>
+      <table class="table-spec">
+        <tr>
+          <td>Operating System</td>
+          <td>Ubuntu 26.04.1 LTS (x86_64)</td>
+        </tr>
+        <tr>
+          <td>Thermal Dissipation</td>
+          <td>50.2°C baseline ➔ 51.0°C peak (+0.8°C delta)</td>
+        </tr>
+        <tr>
+          <td>Thermal Throttling</td>
+          <td>✅ NONE (Stable Clocking)</td>
+        </tr>
+        <tr>
+          <td>CPU Performance</td>
+          <td>5186.1 MFLOP/s (0 arithmetic faults)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QC Checklist -->
+  <div class="card">
+    <div class="section-title">
+      <span>✅ 5-Dimension Quality Control Verification</span>
+    </div>
+    <div class="qc-item">
+      <span>CPU Multi-Core Torture & Floating-Point Integrity</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>RAM Saturation & Bit-Flip Parity Test</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>NVMe Storage Sequential & Random 4KB Stress</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>Battery Sustenance & Active Discharge Rate</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>Thermal Cooling & Clock Stability Under Peak Heat</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="window.print()">
+      🖨️ Print / Save PDF Certificate
+    </button>
+    <button class="btn btn-secondary" onclick="downloadJSON()">
+      💾 Download Audit JSON
+    </button>
+  </div>
+</div>
+
+<script>
+  function downloadJSON() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(`{
+  "auditId": "BQC-20261003-448FAB44",
+  "auditDate": "2026-10-03T13:32:40.361643+00:00",
+  "certifiedGrade": "A+",
+  "overallScore": 97.0,
+  "system": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "osVersion": "7.0.0-34-generic",
+    "cpu": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+    "cpuCores": 4,
+    "cpuThreads": 8,
+    "ramGb": 31.23,
+    "storageGb": 936.8,
+    "model": "S6445 MD61489",
+    "manufacturer": "MEDION",
+    "architecture": "x86_64",
+    "biosVersion": "212"
+  },
+  "battery": {
+    "healthPercent": 88.2,
+    "wearPercent": 11.8,
+    "cycleCount": 137,
+    "designCapacityMwh": 41610.0,
+    "fullCapacityMwh": 36685.0,
+    "currentCapacityMwh": 10636.0,
+    "currentVoltageMv": 10623.0,
+    "dischargeRateMw": 17362.0,
+    "projectedHoursStudent": 2.11,
+    "projectedHoursHeavy": 0.96,
+    "projectedHoursIdle": 4.4,
+    "studentBadge": "NEEDS_CHARGER_LESS_THAN_3H",
+    "isSimulatedOrAC": false,
+    "powerState": "Discharging",
+    "modelName": "M153137"
+  },
+  "thermals": {
+    "baselineTempC": 50.2,
+    "peakTempC": 51.0,
+    "deltaTempC": 0.8,
+    "throttleDetected": false,
+    "throttlingPercent": 0.0,
+    "frequencyBaselineGhz": 1.9,
+    "frequencyUnderStressGhz": 1.9
+  },
+  "qcSummary": {
+    "cpuStatus": "PASSED",
+    "memoryStatus": "PASSED",
+    "storageStatus": "PASSED",
+    "batteryStatus": "PASSED",
+    "thermalStatus": "PASSED",
+    "overallStatus": "CERTIFIED",
+    "passedChecksCount": 5,
+    "totalChecksCount": 5,
+    "notes": []
+  },
+  "studentSuitability": {
+    "recommendation": "Battery capacity is degraded or limited. Charger required for prolonged campus lecture blocks and off-desk study.",
+    "expectedClassroomBatteryLife": "2.1 Hours (Charger Needed)",
+    "badge": "NEEDS_CHARGER_LESS_THAN_3H",
+    "workloadReadiness": {
+      "webBrowsingAndResearch": "LIMITED (<3 hrs)",
+      "videoLecturesAndZoom": "LIMITED (<2.5 hrs)",
+      "codingAndIDEs": "LIMITED (<2 hrs)",
+      "multitaskingAndDocs": "LIMITED (<3 hrs)"
+    }
+  },
+  "benchmarks": {
+    "cpuFloatingPointOpsSec": 5186096873.7,
+    "cpuMultiCoreScore": 100.0,
+    "memoryThroughputMbSec": 1086.2,
+    "memoryErrorsDetected": 0,
+    "storageSeqWriteMbSec": 193.7,
+    "storageSeqReadMbSec": 212.7,
+    "storageRandWriteIops": 155966.8,
+    "storageRandReadIops": 183293.0,
+    "stressDurationSeconds": 5.3
+  },
+  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-448FAB44",
+  "schemaVersion": "2026.1"
+}`);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "benchqc_audit.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  }
+</script>
+
+</body>
+</html>

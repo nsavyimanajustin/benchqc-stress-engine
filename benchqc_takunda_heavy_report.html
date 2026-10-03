@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BenchQC Audit Report · BQC-20261003-F8D14D6D</title>
+  <style>
+    :root {
+      --bg: #0B0F17;
+      --card-bg: #131B29;
+      --card-border: #1E293B;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --accent-emerald: #10B981;
+      --accent-blue: #3B82F6;
+      --accent-amber: #F59E0B;
+      --accent-red: #EF4444;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #10B981, #047857);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 900;
+      font-size: 18px;
+    }
+    .audit-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 70%), var(--card-bg);
+    }
+    @media (max-width: 640px) {
+      .hero-card { grid-template-columns: 1fr; }
+      .audit-meta { text-align: left; }
+    }
+    .device-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 6px;
+    }
+    .device-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .grade-badge-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      background: #064e3b;
+      border: 2px solid #059669;
+      border-radius: 16px;
+      text-align: center;
+      min-width: 140px;
+    }
+    .grade-val {
+      font-size: 38px;
+      font-weight: 900;
+      color: #34d399;
+      line-height: 1;
+    }
+    .grade-score {
+      font-size: 12px;
+      color: #CBD5E1;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+    .badge-emerald {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+    }
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #60A5FA;
+    }
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94A3B8;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .stat-box {
+      background: #0B0F17;
+      border: 1px solid #1E293B;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFF;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .table-spec {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .table-spec td {
+      padding: 10px 0;
+      border-bottom: 1px solid #1E293B;
+    }
+    .table-spec td:first-child {
+      color: var(--text-muted);
+      width: 35%;
+    }
+    .table-spec td:last-child {
+      font-weight: 600;
+      color: #FFF;
+    }
+    .qc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #0B0F17;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .pass-tag {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: #10B981;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #059669;
+    }
+    .btn-secondary {
+      background: #1E293B;
+      color: #E2E8F0;
+    }
+    .btn-secondary:hover {
+      background: #334155;
+    }
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      .card { background: white; border: 1px solid #ccc; color: black; }
+      .stat-box, .qc-item { background: #f8fafc; border: 1px solid #e2e8f0; color: black; }
+      .btn-group { display: none; }
+      .device-title, .stat-val, .table-spec td:last-child { color: black; }
+      .logo-icon { -webkit-print-color-adjust: exact; }
+      .grade-badge-box { -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Navigation / Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">⚡</div>
+      <div>BENCH<span style="color: var(--accent-emerald);">QC</span> VERIFIED</div>
+    </div>
+    <div class="audit-meta">
+      <div>Audit ID: <strong>BQC-20261003-F8D14D6D</strong></div>
+      <div>Date: 2026-10-03 09:42:29 UTC</div>
+    </div>
+  </div>
+
+  <!-- Hero Summary Card -->
+  <div class="card hero-card">
+    <div>
+      <div class="device-title">HP 250RT 15.6 inch G9 Notebook PC</div>
+      <div class="device-sub">HP · Windows 11 · Intel(R) N150</div>
+      <div class="badge-pill badge-emerald">
+        🎓 STUDENT APPROVED (4H+ SUSTAINED)
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px; max-width: 520px;">
+        Highly recommended for full-day campus lectures, lab work, coding, and library study without carrying a charger.
+      </p>
+    </div>
+    <div class="grade-badge-box">
+      <div class="grade-val">A+</div>
+      <div class="grade-score">100.0 / 100</div>
+    </div>
+  </div>
+
+  <!-- Battery Sustenance Matrix -->
+  <div class="card">
+    <div class="section-title">
+      <span>🔋 Battery Sustenance & Load Endurance</span>
+    </div>
+    <div class="grid-3" style="margin-bottom: 16px;">
+      <div class="stat-box">
+        <div class="stat-label">🎓 Student Multitasking</div>
+        <div class="stat-val" style="color: #34D399;">4.2 Hours</div>
+        <div class="stat-sub">15 Tabs + Code IDE + Video</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">⚡ 100% Torture Burn</div>
+        <div class="stat-val" style="color: #60A5FA;">1.9 Hours</div>
+        <div class="stat-sub">Full Core Render / Compile</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">📖 Idle / Reading</div>
+        <div class="stat-val" style="color: #FBBF24;">8.7 Hours</div>
+        <div class="stat-sub">PDF Notes & Document View</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <table class="table-spec">
+        <tr>
+          <td>Health / Wear</td>
+          <td><strong>100.0% Health</strong> (Wear: 0.0%)</td>
+        </tr>
+        <tr>
+          <td>Cycle Count</td>
+          <td>0 Verified Cycles</td>
+        </tr>
+        <tr>
+          <td>Battery Capacity</td>
+          <td>38,540 mWh (Design: 38,540 mWh)</td>
+        </tr>
+      </table>
+      <table class="table-spec">
+        <tr>
+          <td>Discharge Draw</td>
+          <td>9,190 mW under load</td>
+        </tr>
+        <tr>
+          <td>Cell Voltage</td>
+          <td>10,880 mV</td>
+        </tr>
+        <tr>
+          <td>Classroom Life</td>
+          <td>4.2 Hours (Full-Day Student Approved)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Hardware Specification Sheet -->
+  <div class="card">
+    <div class="section-title">
+      <span>💻 Hardware Specifications & Thermals</span>
+    </div>
+    <div class="grid-2">
+      <table class="table-spec">
+        <tr>
+          <td>Processor</td>
+          <td>Intel(R) N150 (4C / 4T)</td>
+        </tr>
+        <tr>
+          <td>Installed RAM</td>
+          <td>7.7 GB (249 MB/s throughput)</td>
+        </tr>
+        <tr>
+          <td>Primary Storage</td>
+          <td>237 GB NVMe / SSD</td>
+        </tr>
+        <tr>
+          <td>Disk Write / Read</td>
+          <td>Write: 281 MB/s · Read: 466 MB/s</td>
+        </tr>
+      </table>
+      <table class="table-spec">
+        <tr>
+          <td>Operating System</td>
+          <td>Windows 11 (AMD64)</td>
+        </tr>
+        <tr>
+          <td>Thermal Dissipation</td>
+          <td>42.0°C baseline ➔ 66.0°C peak (+24.0°C delta)</td>
+        </tr>
+        <tr>
+          <td>Thermal Throttling</td>
+          <td>✅ NONE (Stable Clocking)</td>
+        </tr>
+        <tr>
+          <td>CPU Performance</td>
+          <td>26.0 MFLOP/s (0 arithmetic faults)</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QC Checklist -->
+  <div class="card">
+    <div class="section-title">
+      <span>✅ 5-Dimension Quality Control Verification</span>
+    </div>
+    <div class="qc-item">
+      <span>CPU Multi-Core Torture & Floating-Point Integrity</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>RAM Saturation & Bit-Flip Parity Test</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>NVMe Storage Sequential & Random 4KB Stress</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>Battery Sustenance & Active Discharge Rate</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+    <div class="qc-item">
+      <span>Thermal Cooling & Clock Stability Under Peak Heat</span>
+      <span class="pass-tag">PASSED</span>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="window.print()">
+      🖨️ Print / Save PDF Certificate
+    </button>
+    <button class="btn btn-secondary" onclick="downloadJSON()">
+      💾 Download Audit JSON
+    </button>
+  </div>
+</div>
+
+<script>
+  function downloadJSON() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(`{
+  "auditId": "BQC-20261003-F8D14D6D",
+  "auditDate": "2026-10-03T09:42:29.460744+00:00",
+  "certifiedGrade": "A+",
+  "overallScore": 100.0,
+  "system": {
+    "os": "Windows 11",
+    "osVersion": "10.0.26200",
+    "cpu": "Intel(R) N150",
+    "cpuCores": 4,
+    "cpuThreads": 4,
+    "ramGb": 7.67,
+    "storageGb": 237.3,
+    "model": "HP 250RT 15.6 inch G9 Notebook PC",
+    "manufacturer": "HP",
+    "architecture": "AMD64",
+    "biosVersion": "F.06"
+  },
+  "battery": {
+    "healthPercent": 100.0,
+    "wearPercent": 0.0,
+    "cycleCount": 0,
+    "designCapacityMwh": 38540.0,
+    "fullCapacityMwh": 38540.0,
+    "currentCapacityMwh": 5781.0,
+    "currentVoltageMv": 10880.0,
+    "dischargeRateMw": 9190.0,
+    "projectedHoursStudent": 4.19,
+    "projectedHoursHeavy": 1.91,
+    "projectedHoursIdle": 8.74,
+    "studentBadge": "STUDENT_APPROVED_4H_PLUS",
+    "isSimulatedOrAC": false,
+    "powerState": "Battery",
+    "modelName": "HW03041XL"
+  },
+  "thermals": {
+    "baselineTempC": 42.0,
+    "peakTempC": 66.0,
+    "deltaTempC": 24.0,
+    "throttleDetected": false,
+    "throttlingPercent": 0.0,
+    "frequencyBaselineGhz": 2.4,
+    "frequencyUnderStressGhz": 2.4
+  },
+  "qcSummary": {
+    "cpuStatus": "PASSED",
+    "memoryStatus": "PASSED",
+    "storageStatus": "PASSED",
+    "batteryStatus": "PASSED",
+    "thermalStatus": "PASSED",
+    "overallStatus": "CERTIFIED",
+    "passedChecksCount": 5,
+    "totalChecksCount": 5,
+    "notes": []
+  },
+  "studentSuitability": {
+    "recommendation": "Highly recommended for full-day campus lectures, lab work, coding, and library study without carrying a charger.",
+    "expectedClassroomBatteryLife": "4.2 Hours (Full-Day Student Approved)",
+    "badge": "STUDENT_APPROVED_4H_PLUS",
+    "workloadReadiness": {
+      "webBrowsingAndResearch": "EXCELLENT (5+ hrs)",
+      "videoLecturesAndZoom": "EXCELLENT (4.5+ hrs)",
+      "codingAndIDEs": "EXCELLENT (4+ hrs)",
+      "multitaskingAndDocs": "EXCELLENT (5+ hrs)"
+    }
+  },
+  "benchmarks": {
+    "cpuFloatingPointOpsSec": 26042925.4,
+    "cpuMultiCoreScore": 100.0,
+    "memoryThroughputMbSec": 248.9,
+    "memoryErrorsDetected": 0,
+    "storageSeqWriteMbSec": 280.6,
+    "storageSeqReadMbSec": 466.0,
+    "storageRandWriteIops": 27930.6,
+    "storageRandReadIops": 11319.6,
+    "stressDurationSeconds": 71.08
+  },
+  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-F8D14D6D",
+  "schemaVersion": "2026.1"
+}`);
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "benchqc_audit.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  }
+</script>
+
+</body>
+</html>

@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 
-title BenchQC Hardware Stress-Testing ^& Battery Sustenance Suite
+title BenchQC FAST INTAKE AUDIT (10s Hardware & Battery Check)
 
 echo ===============================================================================
-echo   BenchQC Hardware Stress-Testing and Battery Sustenance Suite
+echo   BenchQC FAST INTAKE AUDIT (10-Second Hardware & Battery Check)
 echo   Target: Windows 10 / 11 (x64 / ARM64)
 echo ===============================================================================
 echo.
@@ -25,14 +25,14 @@ if %errorlevel% neq 0 (
     set PY_CMD=python
 )
 
-:: 2. Launch BenchQC
-echo [i] Starting BenchQC Hardware Audit & Battery Sustenance Test...
-%PY_CMD% -m benchqc %*
+:: 2. Launch BenchQC Quick
+echo [i] Starting BenchQC Fast Intake Audit...
+%PY_CMD% -m benchqc --quick %*
 
 if %errorlevel% equ 0 (
     echo.
     echo ===============================================================================
-    echo [SUCCESS] Audit finished successfully!
+    echo [SUCCESS] Fast Intake Audit finished successfully!
     echo - Visual HTML Certificate : benchqc_report.html
     echo - Machine Audit Artifact  : benchqc_audit.json
     echo ===============================================================================

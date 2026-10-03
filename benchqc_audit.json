@@ -1,6 +1,6 @@
 {
-  "auditId": "BQC-20261003-7C9D3B34",
-  "auditDate": "2026-10-03T08:25:31.789327+00:00",
+  "auditId": "BQC-20261003-448FAB44",
+  "auditDate": "2026-10-03T13:32:40.361643+00:00",
   "certifiedGrade": "A+",
   "overallScore": 97.0,
   "system": {
@@ -19,28 +19,28 @@
   "battery": {
     "healthPercent": 88.2,
     "wearPercent": 11.8,
-    "cycleCount": 136,
+    "cycleCount": 137,
     "designCapacityMwh": 41610.0,
     "fullCapacityMwh": 36685.0,
-    "currentCapacityMwh": 36240.0,
-    "currentVoltageMv": 12821.0,
-    "dischargeRateMw": 11800.0,
-    "projectedHoursStudent": 3.11,
-    "projectedHoursHeavy": 1.38,
-    "projectedHoursIdle": 6.33,
-    "studentBadge": "CAMPUS_READY_3H_TO_4H",
+    "currentCapacityMwh": 10636.0,
+    "currentVoltageMv": 10623.0,
+    "dischargeRateMw": 17362.0,
+    "projectedHoursStudent": 2.11,
+    "projectedHoursHeavy": 0.96,
+    "projectedHoursIdle": 4.4,
+    "studentBadge": "NEEDS_CHARGER_LESS_THAN_3H",
     "isSimulatedOrAC": false,
-    "powerState": "Not charging",
+    "powerState": "Discharging",
     "modelName": "M153137"
   },
   "thermals": {
-    "baselineTempC": 50.0,
-    "peakTempC": 51.4,
-    "deltaTempC": 1.4,
+    "baselineTempC": 50.2,
+    "peakTempC": 51.0,
+    "deltaTempC": 0.8,
     "throttleDetected": false,
     "throttlingPercent": 0.0,
-    "frequencyBaselineGhz": 1.2,
-    "frequencyUnderStressGhz": 1.2
+    "frequencyBaselineGhz": 1.9,
+    "frequencyUnderStressGhz": 1.9
   },
   "qcSummary": {
     "cpuStatus": "PASSED",
@@ -54,27 +54,27 @@
     "notes": []
   },
   "studentSuitability": {
-    "recommendation": "Campus-ready for standard 3-hour lecture blocks and medium study sessions. Recommend carrying a lightweight charger for evening library marathons.",
-    "expectedClassroomBatteryLife": "3.1 Hours (Campus Ready)",
-    "badge": "CAMPUS_READY_3H_TO_4H",
+    "recommendation": "Battery capacity is degraded or limited. Charger required for prolonged campus lecture blocks and off-desk study.",
+    "expectedClassroomBatteryLife": "2.1 Hours (Charger Needed)",
+    "badge": "NEEDS_CHARGER_LESS_THAN_3H",
     "workloadReadiness": {
-      "webBrowsingAndResearch": "GOOD (3.5 - 4 hrs)",
-      "videoLecturesAndZoom": "GOOD (3 - 3.5 hrs)",
-      "codingAndIDEs": "GOOD (3 - 3.5 hrs)",
-      "multitaskingAndDocs": "GOOD (3.5 hrs)"
+      "webBrowsingAndResearch": "LIMITED (<3 hrs)",
+      "videoLecturesAndZoom": "LIMITED (<2.5 hrs)",
+      "codingAndIDEs": "LIMITED (<2 hrs)",
+      "multitaskingAndDocs": "LIMITED (<3 hrs)"
     }
   },
   "benchmarks": {
-    "cpuFloatingPointOpsSec": 2731350438.6,
+    "cpuFloatingPointOpsSec": 5186096873.7,
     "cpuMultiCoreScore": 100.0,
-    "memoryThroughputMbSec": 978.9,
+    "memoryThroughputMbSec": 1086.2,
     "memoryErrorsDetected": 0,
-    "storageSeqWriteMbSec": 114.8,
-    "storageSeqReadMbSec": 122.2,
-    "storageRandWriteIops": 87888.6,
-    "storageRandReadIops": 67982.0,
-    "stressDurationSeconds": 5.36
+    "storageSeqWriteMbSec": 193.7,
+    "storageSeqReadMbSec": 212.7,
+    "storageRandWriteIops": 155966.8,
+    "storageRandReadIops": 183293.0,
+    "stressDurationSeconds": 5.3
   },
-  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-7C9D3B34",
+  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-448FAB44",
   "schemaVersion": "2026.1"
 }

@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 
-title BenchQC Hardware Stress-Testing ^& Battery Sustenance Suite
+title BenchQC MAXIMUM HEAVY STRESS TEST & Battery Sustenance Suite
 
 echo ===============================================================================
-echo   BenchQC Hardware Stress-Testing and Battery Sustenance Suite
+echo   BenchQC MAXIMUM HEAVY STRESS TEST (45s 100%% CPU, 4GB RAM, Deep I/O)
 echo   Target: Windows 10 / 11 (x64 / ARM64)
 echo ===============================================================================
 echo.
@@ -25,14 +25,14 @@ if %errorlevel% neq 0 (
     set PY_CMD=python
 )
 
-:: 2. Launch BenchQC
-echo [i] Starting BenchQC Hardware Audit & Battery Sustenance Test...
-%PY_CMD% -m benchqc %*
+:: 2. Launch BenchQC Heavy
+echo [i] Starting BenchQC Heavy Torture & Battery Sustenance Audit...
+%PY_CMD% -m benchqc --heavy %*
 
 if %errorlevel% equ 0 (
     echo.
     echo ===============================================================================
-    echo [SUCCESS] Audit finished successfully!
+    echo [SUCCESS] Heavy Stress Audit finished successfully!
     echo - Visual HTML Certificate : benchqc_report.html
     echo - Machine Audit Artifact  : benchqc_audit.json
     echo ===============================================================================

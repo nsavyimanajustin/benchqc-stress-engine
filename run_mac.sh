@@ -16,3 +16,8 @@ fi
 
 echo "[i] Launching BenchQC Stress & Battery Sustenance Suite on macOS..."
 "$PY_CMD" -m benchqc "$@"
+
+if [ -f "benchqc_report.html" ]; then
+    echo "[i] Launching visual HTML report in your browser..."
+    open benchqc_report.html >/dev/null 2>&1 &
+fi

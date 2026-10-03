@@ -1,0 +1,80 @@
+{
+  "auditId": "BQC-20261003-F8D14D6D",
+  "auditDate": "2026-10-03T09:42:29.460744+00:00",
+  "certifiedGrade": "A+",
+  "overallScore": 100.0,
+  "system": {
+    "os": "Windows 11",
+    "osVersion": "10.0.26200",
+    "cpu": "Intel(R) N150",
+    "cpuCores": 4,
+    "cpuThreads": 4,
+    "ramGb": 7.67,
+    "storageGb": 237.3,
+    "model": "HP 250RT 15.6 inch G9 Notebook PC",
+    "manufacturer": "HP",
+    "architecture": "AMD64",
+    "biosVersion": "F.06"
+  },
+  "battery": {
+    "healthPercent": 100.0,
+    "wearPercent": 0.0,
+    "cycleCount": 0,
+    "designCapacityMwh": 38540.0,
+    "fullCapacityMwh": 38540.0,
+    "currentCapacityMwh": 5781.0,
+    "currentVoltageMv": 10880.0,
+    "dischargeRateMw": 9190.0,
+    "projectedHoursStudent": 4.19,
+    "projectedHoursHeavy": 1.91,
+    "projectedHoursIdle": 8.74,
+    "studentBadge": "STUDENT_APPROVED_4H_PLUS",
+    "isSimulatedOrAC": false,
+    "powerState": "Battery",
+    "modelName": "HW03041XL"
+  },
+  "thermals": {
+    "baselineTempC": 42.0,
+    "peakTempC": 66.0,
+    "deltaTempC": 24.0,
+    "throttleDetected": false,
+    "throttlingPercent": 0.0,
+    "frequencyBaselineGhz": 2.4,
+    "frequencyUnderStressGhz": 2.4
+  },
+  "qcSummary": {
+    "cpuStatus": "PASSED",
+    "memoryStatus": "PASSED",
+    "storageStatus": "PASSED",
+    "batteryStatus": "PASSED",
+    "thermalStatus": "PASSED",
+    "overallStatus": "CERTIFIED",
+    "passedChecksCount": 5,
+    "totalChecksCount": 5,
+    "notes": []
+  },
+  "studentSuitability": {
+    "recommendation": "Highly recommended for full-day campus lectures, lab work, coding, and library study without carrying a charger.",
+    "expectedClassroomBatteryLife": "4.2 Hours (Full-Day Student Approved)",
+    "badge": "STUDENT_APPROVED_4H_PLUS",
+    "workloadReadiness": {
+      "webBrowsingAndResearch": "EXCELLENT (5+ hrs)",
+      "videoLecturesAndZoom": "EXCELLENT (4.5+ hrs)",
+      "codingAndIDEs": "EXCELLENT (4+ hrs)",
+      "multitaskingAndDocs": "EXCELLENT (5+ hrs)"
+    }
+  },
+  "benchmarks": {
+    "cpuFloatingPointOpsSec": 26042925.4,
+    "cpuMultiCoreScore": 100.0,
+    "memoryThroughputMbSec": 248.9,
+    "memoryErrorsDetected": 0,
+    "storageSeqWriteMbSec": 280.6,
+    "storageSeqReadMbSec": 466.0,
+    "storageRandWriteIops": 27930.6,
+    "storageRandReadIops": 11319.6,
+    "stressDurationSeconds": 71.08
+  },
+  "officialVerificationUrl": "https://benchqc.com/verify/BQC-20261003-F8D14D6D",
+  "schemaVersion": "2026.1"
+}
